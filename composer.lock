@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "025c70b1b54fcb9f6f244ae7ff06ed77",
+    "content-hash": "4c9a9a0801dd0f4b883f961f7d8393f1",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -1696,6 +1696,33 @@
             "time": "2017-01-02T19:04:26+00:00"
         },
         {
+            "name": "symfony/orm-pack",
+            "version": "v1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/orm-pack.git",
+                "reference": "e938d2441f846d1026eebd4e104155a0e32d9edc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/orm-pack/zipball/e938d2441f846d1026eebd4e104155a0e32d9edc",
+                "reference": "e938d2441f846d1026eebd4e104155a0e32d9edc",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/doctrine-bundle": "^1.6.10",
+                "doctrine/orm": "^2.5.11",
+                "php": "^7.0"
+            },
+            "type": "metapackage",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A pack for the Doctrine ORM",
+            "time": "2017-09-29T18:31:52+00:00"
+        },
+        {
             "name": "symfony/polyfill-apcu",
             "version": "v1.10.0",
             "source": {
@@ -2489,7 +2516,10 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.5.9"
+        "php": ">=7.2.10"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "platform-overrides": {
+        "php": "7.2.10"
+    }
 }
