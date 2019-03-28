@@ -5,12 +5,6 @@
 {% block title %}<h1>Liste des utilisateurs</h1>{% endblock %}
 
 {% block body %}
-    {% if users|length == 0 %}
-        <div class="alert alert-warning" role="alert">
-            Il n'y a pas encore d'utilisateur enregistré. <a href="{{ path('user_create') }}"
-                                                             class="btn btn-warning pull-right">Créer un utilisateur</a>
-        </div>
-    {% else %}
         <div class="row">
             <table class="table">
                 <thead>
@@ -40,5 +34,4 @@
                 </tbody>
             </table>
         </div>
-    {% endif %}
 {% endblock %}

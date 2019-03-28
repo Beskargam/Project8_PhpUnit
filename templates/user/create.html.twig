@@ -1,14 +1,44 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}<h1>Créer un utilisateur</h1>{% endblock %}
+{% block title %}Créer un utilisateur{% endblock %}
 {% block header_img %}{% endblock %}
 
 {% block body %}
-    <div class="row">
-        {{ form_start(form, {'action' : path('user_create')}) }}
-            {{ form_widget(form) }}
-
-            <button type="submit" class="btn btn-success pull-right">Ajouter</button>
-        {{ form_end(form) }}
+    <div class="row justify-content-center">
+        <div class="col-sm-10 col-md-6 col-lg-4">
+            <div class="login-form">
+                {{ form_start(form, {'action' : path('user_create')}) }}
+                <div class="field-space">
+                    {{ form_label(form.username) }}
+                    {{ form_widget(form.username) }}
+                </div>
+                <div class="field-space">
+                    {{ form_label(form.email) }}
+                    {{ form_widget(form.email) }}
+                </div>
+                <div class="field-space">
+                    {{ form_label(form.plainPassword.first) }}
+                    {{ form_widget(form.plainPassword.first) }}
+                </div>
+                <div class="field-space">
+                    {{ form_label(form.plainPassword.second) }}
+                    {{ form_widget(form.plainPassword.second) }}
+                </div>
+                <div class="field-space">
+                    {{ form_label(form.roles) }}
+                    {{ form_widget(form.roles) }}
+                </div>
+                <button class="btn btn-lg btn-primary" type="submit">
+                    S'enregistrer
+                </button>
+                {{ form_end(form) }}
+            </div>
+        </div>
     </div>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link rel="stylesheet" href="{{ asset('css/form.css') }}">
 {% endblock %}

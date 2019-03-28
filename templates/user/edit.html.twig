@@ -1,14 +1,42 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}<h1>Modifier <strong>{{ user.username }}</strong></h1>{% endblock %}
+{% block title %}Modifier {{ user.username }}{% endblock %}
 {% block header_img %}{% endblock %}
 
 {% block body %}
     <div class="row">
-        {{ form_start(form, {'action' : path('user_edit', {'id' : user.id})}) }}
-        {{ form_widget(form) }}
-
-        <button type="submit" class="btn btn-success pull-right">Modifier</button>
-        {{ form_end(form) }}
+        <div class="col-sm-12">
+            {{ form_start(form, {'action' : path('user_create')}) }}
+            <div class="field-space">
+                {{ form_label(form.username) }}
+                {{ form_widget(form.username) }}
+            </div>
+            <div class="field-space">
+                {{ form_label(form.email) }}
+                {{ form_widget(form.email) }}
+            </div>
+            <div class="field-space">
+                {{ form_label(form.plainPassword.first) }}
+                {{ form_widget(form.plainPassword.first) }}
+            </div>
+            <div class="field-space">
+                {{ form_label(form.plainPassword.second) }}
+                {{ form_widget(form.plainPassword.second) }}
+            </div>
+            <div class="field-space">
+                {{ form_label(form.roles) }}
+                {{ form_widget(form.roles) }}
+            </div>
+            <button class="btn btn-lg btn-primary" type="submit">
+                S'enregistrer
+            </button>
+            {{ form_end(form) }}
+        </div>
     </div>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link rel="stylesheet" href="{{ asset('css/form.css') }}">
 {% endblock %}

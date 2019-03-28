@@ -40,11 +40,12 @@ class UserType extends AbstractType
                 'second_options' => [
                     'label' => false,
                     'attr' => [
-                        'placeholder' => 'Contfirmer mot de passe'
+                        'placeholder' => 'Confirmer mot de passe'
                     ]
                 ],
             ])
             ->add('roles', CollectionType::class, [
+                'label' => false,
                 'entry_type' => ChoiceType::class,
                 'entry_options' => [
                     'label' => false,

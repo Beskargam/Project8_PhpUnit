@@ -5,10 +5,21 @@
 {% endblock %}
 
 {% block body %}
-
-    <div class="row">
-        <a href="{{ path('task_create') }}" class="btn btn-success">Créer une nouvelle tâche</a>
-        <a href="{{ path('task_list') }}" class="btn btn-info">Consulter la liste des tâches à faire</a>
-        <a href="" class="btn btn-secondary">Consulter la liste des tâches terminées</a>
-    </div>
+    <section class="container body-box">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card home-card">
+                    <img class="card-img-top card-img-display" src="{{ asset('img/todolist_homepage.jpg') }}"
+                         alt="todo list">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <a href="{{ path('task_create') }}" class="btn btn-success">Créer une nouvelle tâche</a>
+                <a href="{{ path('task_list') }}" class="btn btn-info">Consulter la liste des tâches à faire</a>
+                <a href="" class="btn btn-secondary">Consulter la liste des tâches terminées</a>
+            </div>
+        </div>
+    </section>
 {% endblock %}

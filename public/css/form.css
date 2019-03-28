@@ -1,0 +1,13 @@
+.flipboard-login {
+    text-align: center;
+    margin: 2rem;
+}
+
+.login-form {
+    border: 3px black solid;
+    padding: 2rem;
+}
+
+.field-space {
+    margin: 1rem;
+}
