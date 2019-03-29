@@ -19,6 +19,30 @@ class TaskRepository extends ServiceEntityRepository
         parent::__construct($registry, Task::class);
     }
 
+    public function getTodoTasks()
+    {
+        $query = $this->createQueryBuilder('t')
+            ->where('t.isDone = :isDone')
+            ->setParameter('isDone', 0)
+            ->orderBy('t.createdAt', 'DESC');
+
+        return $query
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getFinishTasks()
+    {
+        $query = $this->createQueryBuilder('t')
+            ->where('t.isDone = :isDone')
+            ->setParameter('isDone', 1)
+            ->orderBy('t.createdAt', 'DESC');
+
+        return $query
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Video[] Returns an array of Video objects
     //  */

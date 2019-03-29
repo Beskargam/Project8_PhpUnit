@@ -1,11 +1,38 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <div class="row">
-        {{ form_start(form, {'action' : path('task_edit', { 'id' : task.id })}) }}
-            {{ form_widget(form) }}
+{% block title %}
+    Modifier une tâche
+{% endblock %}
 
-            <button type="submit" class="btn btn-success pull-right">Modifier</button>
-        {{ form_end(form) }}
-    </div>
+{% block body %}
+    <section class="flipboard-box">
+        <div class="container body-box">
+            <div class="row justify-content-center">
+                <div class="col-sm-10">
+                    <h1 class="h3 mb-3 font-weight-normal">Ajouter une tâche</h1>
+                    <div class="box-form">
+                        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+                        <div class="field-space">
+                            {{ form_label(form.title) }}
+                            {{ form_widget(form.title) }}
+                        </div>
+                        <div class="field-space">
+                            {{ form_label(form.content) }}
+                            {{ form_widget(form.content) }}
+                        </div>
+                        <div class="field-space">
+                            {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link rel="stylesheet" href="{{ asset('css/form.css') }}">
 {% endblock %}

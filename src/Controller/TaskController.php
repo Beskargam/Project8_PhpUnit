@@ -13,13 +13,24 @@ use Symfony\Component\HttpFoundation\Request;
 class TaskController extends AbstractController
 {
     /**
-     * @Route("/tasks", name="task_list")
+     * @Route("/tasks/todo", name="todo_task_list")
      */
-    public function listAction(TaskRepository $taskRepository)
+    public function todoListAction(TaskRepository $taskRepository)
     {
         $tasks = $taskRepository
-            ->findAll();
-        return $this->render('task/list.html.twig', [
+            ->getTodoTasks();
+        return $this->render('task/todolist.html.twig', [
+            'tasks' => $tasks,
+        ]);
+    }
+    /**
+     * @Route("/tasks/finish", name="finish_task_list")
+     */
+    public function finishListAction(TaskRepository $taskRepository)
+    {
+        $tasks = $taskRepository
+            ->getFinishTasks();
+        return $this->render('task/finishlist.html.twig', [
             'tasks' => $tasks,
         ]);
     }
@@ -48,7 +59,7 @@ class TaskController extends AbstractController
                 'La tâche a été bien été ajoutée.'
             );
 
-            return $this->redirectToRoute('task_list');
+            return $this->redirectToRoute('todo_task_list');
         }
 
         return $this->render('task/create.html.twig', [
@@ -74,7 +85,7 @@ class TaskController extends AbstractController
                 'La tâche a bien été modifiée.'
             );
 
-            return $this->redirectToRoute('task_list');
+            return $this->redirectToRoute('todo_task_list');
         }
 
         return $this->render('task/edit.html.twig', [
@@ -100,7 +111,7 @@ class TaskController extends AbstractController
             )
         );
 
-        return $this->redirectToRoute('task_list');
+        return $this->redirectToRoute('todo_task_list');
     }
 
     /**
@@ -117,6 +128,6 @@ class TaskController extends AbstractController
             'La tâche a bien été supprimée.'
         );
 
-        return $this->redirectToRoute('task_list');
+        return $this->redirectToRoute('todo_task_list');
     }
 }

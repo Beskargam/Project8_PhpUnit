@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Liste des tâches
+{% endblock %}
+
+{% block header_img %}<img class="slide-image" src="{{ asset('img/todolist_content.jpg') }}"
+                           alt="todo list">{% endblock %}
+
+{% block body %}
+    <section class="container body-box">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card home-card">
+                    <img class="card-img-top card-img-display" src="{{ asset('img/todolist_homepage.jpg') }}"
+                         alt="todo list">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <a href="{{ path('task_create') }}" class="btn btn-primary">
+                    Créer une tâche</a>
+                <a href="{{ path('finish_task_list') }}" class="btn btn-success">
+                    Consulter la liste des tâches terminées</a>
+            </div>
+        </div>
+        <hr>
+        <div class="row justify-content-center">
+            <div class="card-group">
+                {% for task in tasks %}
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ task.title }}</h5>
+                                <p class="card-text">{{ task.content|nl2br }}</p>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">{{ task.user.username }}</small>
+                                <a class="float-right"
+                                   href="{{ path('task_delete', {'id' : task.id}) }}"><span
+                                            class="oi oi-trash"></span></a>
+                                <a class="action-button-space float-right"
+                                   href="{{ path('task_edit', {'id' : task.id}) }}"><span
+                                            class="oi oi-pencil"></span></a>
+                                <a class="action-button-space float-right"
+                                   href="{{ path('task_toggle', {'id' : task.id}) }}">
+                                    <span class="oi oi-check"></span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="col-sm-12">
+                        <div class="alert alert-warning" role="alert">
+                            Il n'y a pas encore de tâche enregistrée.
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}
