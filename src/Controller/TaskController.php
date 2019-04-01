@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Task;
 use App\Form\TaskType;
 use App\Repository\TaskRepository;
+use App\Services\TaskHandler;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,6 +24,7 @@ class TaskController extends AbstractController
             'tasks' => $tasks,
         ]);
     }
+
     /**
      * @Route("/tasks/finish", name="finish_task_list")
      */
@@ -39,21 +41,12 @@ class TaskController extends AbstractController
      * @Route("/tasks/create", name="task_create")
      */
     public function createAction(EntityManagerInterface $manager,
-                                 Request $request)
+                                 Request $request,
+                                 TaskHandler $formHandler)
     {
-        $task = new Task();
-        $addTaskForm = $this->createForm(TaskType::class, $task);
-        $addTaskForm->handleRequest($request);
+        $addTaskForm = $this->createForm(TaskType::class);
 
-        if ($addTaskForm->isSubmitted() && $addTaskForm->isValid()) {
-            $task = $addTaskForm->getData();
-
-            $user = $this->getUser();
-            $task->setUser($user);
-
-            $manager->persist($task);
-            $manager->flush();
-
+        if ($formHandler->handleNew($addTaskForm, $request, $manager)) {
             $this->addFlash(
                 'success',
                 'La tâche a été bien été ajoutée.'
@@ -72,14 +65,12 @@ class TaskController extends AbstractController
      */
     public function editAction(EntityManagerInterface $manager,
                                Task $task,
-                               Request $request)
+                               Request $request,
+                               TaskHandler $formHandler)
     {
         $editForm = $this->createForm(TaskType::class, $task);
-        $editForm->handleRequest($request);
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $manager->flush();
-
+        if ($formHandler->handleEdit($editForm, $request, $manager)) {
             $this->addFlash(
                 'success',
                 'La tâche a bien été modifiée.'
