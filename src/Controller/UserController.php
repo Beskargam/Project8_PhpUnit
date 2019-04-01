@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
+use App\Services\UserHandler;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -31,20 +32,13 @@ class UserController extends AbstractController
      */
     public function createAction(EntityManagerInterface $manager,
                                  Request $request,
-                                 UserPasswordEncoderInterface $passwordEncoder)
+                                 UserPasswordEncoderInterface $passwordEncoder,
+                                 UserHandler $formHandler)
     {
-        $user = new User();
-        $addUserForm = $this->createForm(UserType::class, $user);
-        $addUserForm->handleRequest($request);
+        $addUserForm = $this->createForm(UserType::class);
 
-        if ($addUserForm->isSubmitted() && $addUserForm->isValid()) {
-
-            $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
-            $user->setPassword($password);
-
-            $manager->persist($user);
-            $manager->flush();
-
+        if ($formHandler->handle($addUserForm, $request, $passwordEncoder, $manager))
+        {
             $this->addFlash(
                 'success',
                 "L'utilisateur a bien été ajouté."
@@ -53,9 +47,9 @@ class UserController extends AbstractController
             return $this->redirectToRoute('user_list');
         }
 
-        return $this->render('user/create.html.twig', [
-            'form' => $addUserForm->createView()
-        ]);
+            return $this->render('user/create.html.twig', [
+                'form' => $addUserForm->createView()
+            ]);
     }
 
     /**
@@ -64,19 +58,13 @@ class UserController extends AbstractController
     public function editAction(EntityManagerInterface $manager,
                                User $user,
                                Request $request,
-                               UserPasswordEncoderInterface $passwordEncoder)
+                               UserPasswordEncoderInterface $passwordEncoder,
+                               UserHandler $formHandler)
     {
         $editUserForm = $this->createForm(UserType::class, $user);
-        $editUserForm->handleRequest($request);
 
-        if ($editUserForm->isSubmitted() && $editUserForm->isValid()) {
-            $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
-            $user->setPassword($password);
-            $role = array($editUserForm->get('roleList')->getData());
-            $user->setRoles(array('roles' => $role));
-
-            $manager->flush();
-
+        if ($formHandler->handle($editUserForm, $request, $passwordEncoder, $manager))
+        {
             $this->addFlash(
                 'success',
                 "L'utilisateur a bien été modifié"
