@@ -32,17 +32,22 @@
                     <div class="col-sm-12">
                         <div class="card">
                             <div class="card-body">
+                                <span class="float-right">{{ task.createdAt|date('d/m/Y H:i')}}</span>
                                 <h5 class="card-title">{{ task.title }}</h5>
                                 <p class="card-text">{{ task.content|nl2br }}</p>
                             </div>
                             <div class="card-footer">
                                 <small class="text-muted">{{ task.user.username }}</small>
-                                <a class="float-right"
-                                   href="{{ path('task_delete', {'id' : task.id}) }}"><span
-                                            class="oi oi-trash"></span></a>
-                                <a class="action-button-space float-right"
-                                   href="{{ path('task_edit', {'id' : task.id}) }}"><span
-                                            class="oi oi-pencil"></span></a>
+                                {% if is_granted('EDIT', task) %}
+                                    <a class="float-right"
+                                       href="{{ path('task_delete', {'id' : task.id}) }}"><span
+                                                class="oi oi-trash"></span></a>
+                                {% endif %}
+                                {% if is_granted('DELETE', task) %}
+                                    <a class="action-button-space float-right"
+                                       href="{{ path('task_edit', {'id' : task.id}) }}"><span
+                                                class="oi oi-pencil"></span></a>
+                                {% endif %}
                                 <a class="action-button-space float-right"
                                    href="{{ path('task_toggle', {'id' : task.id}) }}">
                                     <span class="oi oi-x"></span>

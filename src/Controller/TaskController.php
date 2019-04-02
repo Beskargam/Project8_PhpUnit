@@ -68,6 +68,8 @@ class TaskController extends AbstractController
                                Request $request,
                                TaskHandler $formHandler)
     {
+        $this->denyAccessUnlessGranted('EDIT', $task);
+
         $editForm = $this->createForm(TaskType::class, $task);
 
         if ($formHandler->handleEdit($editForm, $request, $manager)) {
@@ -94,13 +96,24 @@ class TaskController extends AbstractController
         $task->toggle(!$task->isDone());
         $manager->flush();
 
-        $this->addFlash(
-            'success',
-            sprintf(
-                'La tâche %s a bien été marquée comme faite.',
-                $task->getTitle()
-            )
-        );
+        if ($task->isDone() == true) {
+            $this->addFlash(
+                'success',
+                sprintf(
+                    'La tâche %s a bien été marquée comme faite.',
+                    $task->getTitle()
+                )
+            );
+        }
+        else {
+            $this->addFlash(
+                'success',
+                sprintf(
+                    'La tâche %s a bien été marquée comme à faire.',
+                    $task->getTitle()
+                )
+            );
+        }
 
         return $this->redirectToRoute('todo_task_list');
     }
@@ -111,6 +124,8 @@ class TaskController extends AbstractController
     public function deleteTaskAction(EntityManagerInterface $manager,
                                      Task $task)
     {
+        $this->denyAccessUnlessGranted('DELETE', $task);
+
         $manager->remove($task);
         $manager->flush();
 
