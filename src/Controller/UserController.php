@@ -37,7 +37,7 @@ class UserController extends AbstractController
     {
         $addUserForm = $this->createForm(UserType::class);
 
-        if ($formHandler->handle($addUserForm, $request, $passwordEncoder, $manager)) {
+        if ($formHandler->handleNew($addUserForm, $request, $passwordEncoder, $manager)) {
             $this->addFlash(
                 'success',
                 "L'utilisateur a bien été ajouté."
@@ -62,7 +62,7 @@ class UserController extends AbstractController
     {
         $editUserForm = $this->createForm(UserType::class, $user);
 
-        if ($formHandler->handle($editUserForm, $request, $passwordEncoder, $manager))
+        if ($formHandler->handleEdit($editUserForm, $request, $passwordEncoder, $manager))
         {
             $this->addFlash(
                 'success',
