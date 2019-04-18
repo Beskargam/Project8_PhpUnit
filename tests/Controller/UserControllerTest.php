@@ -66,9 +66,9 @@ class UserControllerTest extends WebTestCase
         $this->assertContains('Nom d\'utilisateur', $client->getResponse()->getContent());
     }
 
-    public function testAddUser()
+    /*public function testAddUser()
     {
-        /*$client = static::createClient();
+        $client = static::createClient();
         $crawler = $client->request('GET', '/users/create');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
@@ -87,6 +87,6 @@ class UserControllerTest extends WebTestCase
         $this->assertContains('form', $client->getResponse()->getContent());
         $this->assertCount(1, $crawler->filter('form'));
         $this->assertCount(3, $crawler->filter('input'));
-        $this->assertCount(1, $crawler->filter('button'));*/
-    }
+        $this->assertCount(1, $crawler->filter('button'));
+    }*/
 }

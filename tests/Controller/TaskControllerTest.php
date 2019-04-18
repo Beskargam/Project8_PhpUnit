@@ -56,7 +56,17 @@ class TaskControllerTest extends WebTestCase
 
         $crawler = $client->request('GET', '/tasks/create');
 
+
+        $form = $crawler->selectButton('Ajouter')->form();
+        $form['task[title]'] = 'AddedWithPhpUnit';
+        $form['task[content]'] = 'Une description de tâche ajouté avec PHPUnit';
+        $client->followRedirects();
+        $crawler = $client->submit($form);
+
         $this->assertSame(200, $client->getResponse()->getStatusCode());
-        $this->assertContains('Ajouter une tâche', $client->getResponse()->getContent());
+        $this->assertContains('AddedWithPhpUnit', $client->getResponse()->getContent());
+        $this->assertContains('Une description de tâche ajouté avec PHPUnit', $client->getResponse()->getContent());
+        $this->assertContains('Créer une tâche', $client->getResponse()->getContent());
+        $this->assertContains('Consulter la liste des tâches terminées', $client->getResponse()->getContent());
     }
 }
