@@ -23,10 +23,7 @@ class TaskVoter extends Voter
             return false;
         }
 
-        if (null == $task->getUser()) {
-            return false;
-        }
-        if ($user->getRoles() == ['ROLE_ADMIN', 'ROLE_USER'] && $task->getUser()->getUsername() == 'Anonyme') {
+        if ($user->getRoles() == ['ROLE_ADMIN', 'ROLE_USER'] && $task->getUser() == null) {
             return true;
         }
 

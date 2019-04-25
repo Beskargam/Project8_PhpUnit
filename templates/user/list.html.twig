@@ -13,6 +13,7 @@
                         <th>Nom d'utilisateur</th>
                         <th>Adresse d'utilisateur</th>
                         {% if is_granted('ROLE_ADMIN') %}
+                            <th>ID</th>
                             <th>Actions</th>
                         {% endif %}
                     </tr>
@@ -24,6 +25,7 @@
                             <td>{{ user.username }}</td>
                             <td>{{ user.email }}</td>
                             {% if is_granted('ROLE_ADMIN') %}
+                                <td>{{ user.id }}</td>
                                 <td>
                                     <a href="{{ path('user_edit', {'id' : user.id}) }}"
                                        class="btn btn-success btn-sm">Edit</a>

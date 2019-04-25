@@ -37,7 +37,13 @@
                                 <p class="card-text">{{ task.content|nl2br }}</p>
                             </div>
                             <div class="card-footer">
-                                <small class="text-muted">{{ task.user.username }}</small>
+                                <small class="text-muted">
+                                    {% if task.user.username is defined %}
+                                        {{ task.user.username }}
+                                    {% else %}
+                                        Anonyme
+                                    {% endif %}
+                                </small>
                                 {% if is_granted('EDIT', task) %}
                                     <a class="float-right"
                                        href="{{ path('task_delete', {'id' : task.id}) }}"><span
