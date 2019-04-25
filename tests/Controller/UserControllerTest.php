@@ -48,7 +48,7 @@ class UserControllerTest extends WebTestCase
         $client->followRedirects();
         $client->submit($form);
 
-        $crawler = $client->request('GET', '/admin/users/4/edit');
+        $crawler = $client->request('GET', '/admin/users/3/edit');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertContains('Modifier l\'utilisateur', $client->getResponse()->getContent());

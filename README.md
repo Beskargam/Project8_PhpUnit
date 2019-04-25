@@ -17,4 +17,4 @@ installation guide :
     Load a couple of fake articles with the fixtures load (php bin/console doctrine:fixtures:load or php bin/console d:f:l)
     Run the app on your localhost with the Symfony developpement server ! (cd project -> php bin/console server:run)
 
-Website : soon
+Codacy badge : [![Codacy Badge](https://api.codacy.com/project/badge/Grade/5a6541e3097a4c2abc34ca3b57f4dd58)](https://www.codacy.com/app/Beskargam/Project8_PhpUnit?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Beskargam/Project8_PhpUnit&amp;utm_campaign=Badge_Grade)
