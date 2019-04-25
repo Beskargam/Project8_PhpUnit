@@ -31,8 +31,8 @@ Security :
 
 Tests : 
 1. There are no UserFixtures. So if you want to load the successfull tests you need to adapt the tests or create 3 user profiles.
- - pseudotestadmin / horg_hvergelmir@hotmail.com / ROLE_ADMIN
- - pseudotest / zenways@laposte.net / ROLE_USER
- - pseudotest2PhpUnit / auredev@gmx.com / ROLE_ADMIN
+ - pseudotestadmin:horg_hvergelmir@hotmail.com:ROLE_ADMIN
+ - pseudotest:zenways@laposte.net:ROLE_USER
+ - pseudotest2PhpUnit:auredev@gmx.com:ROLE_ADMIN
  
  CODE FUN !
