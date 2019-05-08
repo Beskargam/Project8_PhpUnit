@@ -29,10 +29,14 @@ class TaskVoter extends Voter
 
         switch ($attribute) {
             case 'EDIT':
-                return $task->getUser()->getId() == $user->getId();
+                if ($user->getRoles() == ['ROLE_ADMIN', 'ROLE_USER'] or $task->getUser() != null && $task->getUser()->getId() == $user->getId()) {
+                    return true;
+                }
                 break;
             case 'DELETE':
-                return $task->getUser()->getId() == $user->getId();
+                if ($user->getRoles() == ['ROLE_ADMIN', 'ROLE_USER'] or $task->getUser() != null && $task->getUser()->getId() == $user->getId()) {
+                    return true;
+                }
                 break;
         }
 
