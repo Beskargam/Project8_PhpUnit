@@ -26,7 +26,7 @@ class TaskType extends AbstractType
                     'placeholder' => false,
                 ]])
             ->add('save', SubmitType::class, [
-                'label' => 'Ajouter',
+                'label' => 'Enregistrer',
             ]);;
     }
 

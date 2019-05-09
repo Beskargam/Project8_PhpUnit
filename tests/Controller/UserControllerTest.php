@@ -48,7 +48,7 @@ class UserControllerTest extends WebTestCase
         $client->followRedirects();
         $client->submit($form);
 
-        $crawler = $client->request('GET', '/admin/users/4/edit');
+        $crawler = $client->request('GET', '/admin/users/3/edit');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertContains('Modifier l\'utilisateur', $client->getResponse()->getContent());
@@ -66,7 +66,7 @@ class UserControllerTest extends WebTestCase
         $this->assertContains('Nom d\'utilisateur', $client->getResponse()->getContent());
     }
 
-    /*public function testAddUser()
+    public function testAddUser()
     {
         $client = static::createClient();
         $crawler = $client->request('GET', '/users/create');
@@ -85,8 +85,8 @@ class UserControllerTest extends WebTestCase
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertContains('form', $client->getResponse()->getContent());
-        $this->assertCount(1, $crawler->apply('form'));
-        $this->assertCount(3, $crawler->apply('input'));
-        $this->assertCount(1, $crawler->apply('button'));
-    }*/
+        $this->assertCount(1, $crawler->filter('form'));
+        $this->assertCount(5, $crawler->filter('input'));
+        $this->assertCount(1, $crawler->filter('button'));
+    }
 }
