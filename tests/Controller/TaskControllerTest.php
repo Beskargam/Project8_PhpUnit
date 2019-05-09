@@ -11,7 +11,7 @@ class TaskControllerTest extends WebTestCase
         $client = static::createClient();
         $crawler = $client->request('GET', '/login');
         $form = $crawler->selectButton('Se connecter')->form();
-        $form['username'] = 'pseudotestadmin';
+        $form['username'] = 'pseudotest';
         $form['password'] = 'pass';
         $client->followRedirects();
         $client->submit($form);
@@ -66,6 +66,7 @@ class TaskControllerTest extends WebTestCase
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertContains('AddedWithPhpUnit', $client->getResponse()->getContent());
         $this->assertContains('Une description de tâche ajouté avec PHPUnit', $client->getResponse()->getContent());
+        $this->assertContains('pseudotestadmin', $client->getResponse()->getContent());
         $this->assertContains('Créer une tâche', $client->getResponse()->getContent());
         $this->assertContains('Consulter la liste des tâches terminées', $client->getResponse()->getContent());
     }
@@ -80,7 +81,7 @@ class TaskControllerTest extends WebTestCase
         $client->followRedirects();
         $client->submit($form);
 
-        $crawler = $client->request('GET', '/tasks/14/edit');
+        $crawler = $client->request('GET', '/tasks/5/edit');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
 

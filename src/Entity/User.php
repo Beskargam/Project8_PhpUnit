@@ -129,6 +129,9 @@ class User implements UserInterface
         return array_unique($roles);
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
@@ -159,6 +162,7 @@ class User implements UserInterface
 
     /**
      * @return mixed
+     * @codeCoverageIgnore
      */
     public function getTasks()
     {
@@ -167,6 +171,7 @@ class User implements UserInterface
 
     /**
      * @param mixed $tasks
+     * @codeCoverageIgnore
      */
     public function setTasks($tasks): void
     {

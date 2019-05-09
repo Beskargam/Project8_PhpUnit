@@ -76,7 +76,7 @@ class UserControllerTest extends WebTestCase
 
         $form = $crawler->selectButton('S\'enregistrer')->form();
         $form['user[username]'] = 'AddedWithPhpUnit';
-        $form['user[email]'] = 'zenways@laposte.net';
+        $form['user[email]'] = 'Arcturus.Morea@gmx.com';
         $form['user[plainPassword][first]'] = 'pass';
         $form['user[plainPassword][second]'] = 'pass';
         $form['user[roles]'] = 'ROLE_USER';
@@ -86,7 +86,7 @@ class UserControllerTest extends WebTestCase
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertContains('form', $client->getResponse()->getContent());
         $this->assertCount(1, $crawler->filter('form'));
-        $this->assertCount(5, $crawler->filter('input'));
+        $this->assertCount(3, $crawler->filter('input'));
         $this->assertCount(1, $crawler->filter('button'));
     }
 }
